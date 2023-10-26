@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Video from './components/VideoPLayer';
+import VideoPLayer from './components/VideoPLayer';
+
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-
-      <StatusBar style="auto" />
-    </View>
+    <div className="App">
+      <VideoPLayer></VideoPLayer>
+      <a>a</a>
+    </div>
   );
 }
 
