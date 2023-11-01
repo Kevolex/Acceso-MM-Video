@@ -21,7 +21,7 @@ const VideoPlayer = () => {
       <h1>Video Player</h1>
       <ReactPlayer
         ref={playerRef}
-        url="https://example.com/video.mp4" // Reemplaza con la URL de tu video remoto o ruta local
+        url="https://youtu.be/J---aiyznGQ" // Reemplaza con la URL de tu video remoto o ruta local
         playing={playing}
         controls={true}
         width="100%"
