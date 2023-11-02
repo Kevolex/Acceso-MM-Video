@@ -1,38 +1,42 @@
-import React, { useState, useRef } from 'react';
-import ReactPlayer from 'react-player';
+import * as React from 'react';
+import { View, StyleSheet, Button } from 'react-native';
+import { Video, ResizeMode } from 'expo-av';
 
-const VideoPlayer = () => {
-  const [playing, setPlaying] = useState(false);
-  const playerRef = useRef(null);
-
-  const togglePlay = () => {
-    setPlaying(!playing);
-  };
-
-  const stopVideo = () => {
-    if (playerRef.current) {
-      playerRef.current.seekTo(0);
-      setPlaying(false);
-    }
-  };
-
+export default function App() {
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
   return (
-    <div>
-      <h1>Video Player</h1>
-      <ReactPlayer
-        ref={playerRef}
-        url="https://youtu.be/J---aiyznGQ" // Reemplaza con la URL de tu video remoto o ruta local
-        playing={playing}
-        controls={true}
-        width="100%"
-        height="auto"
+    <View style={styles.container}>
+      <Video
+        source={{ uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
+        rate={1.0}
+        volume={1.0}
+        isMuted={false}
+        resizeMode="cover"
+        shouldPlay={false}
+        isLooping={false}
+        useNativeControls
+        style={styles.video}
+        onPlaybackStatusUpdate={(status) => {
+          if (status.isError) {
+            console.error("Error de reproducción de video:", status.error);
+          }
+        }}
       />
-      <div>
-        <button onClick={togglePlay}>{playing ? 'Pause' : 'Play'}</button>
-        <button onClick={stopVideo}>Stop</button>
-      </div>
-    </div>
+    </View>
   );
-};
+}
 
-export default VideoPlayer;
+const styles = StyleSheet.create({
+  video: {
+    width: 700,
+    height: 500
+  },
+
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
